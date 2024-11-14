@@ -27,6 +27,16 @@ function weightedSearchAlgorithm(nodes, start, target, nodesToAnimate, boardArra
   }
 }
 
+function calculatePathLength(nodes, target) {
+  let length = 0;
+  let currentNode = nodes[target];
+  while (currentNode.previousNode) {
+    length++;
+    currentNode = nodes[currentNode.previousNode];
+  }
+  return length;
+}
+
 function closestNode(nodes, unvisitedNodes) {
   let currentClosest, index;
   for (let i = 0; i < unvisitedNodes.length; i++) {

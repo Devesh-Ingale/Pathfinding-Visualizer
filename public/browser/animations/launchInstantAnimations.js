@@ -1,6 +1,16 @@
 const weightedSearchAlgorithm = require("../pathfindingAlgorithms/weightedSearchAlgorithm");
 const unweightedSearchAlgorithm = require("../pathfindingAlgorithms/unweightedSearchAlgorithm");
 
+function calculatePathLength(nodes, target) {
+  let length = 0;
+  let currentNode = nodes[target];
+  while (currentNode.previousNode) {
+    length++;
+    currentNode = nodes[currentNode.previousNode];
+  }
+  return length;
+}
+
 function launchInstantAnimations(board, success, type, object, algorithm, heuristic) {
   let nodes = object ? board.objectNodesToAnimate.slice(0) : board.nodesToAnimate.slice(0);
   let shortestNodes;
@@ -59,6 +69,10 @@ function launchInstantAnimations(board, success, type, object, algorithm, heuris
     board.objectShortestPathNodesToAnimate = [];
     board.shortestPathNodesToAnimate = [];
     board.clearNodeStatuses();
+    if (success) {
+      const pathLength = calculatePathLength(board.nodes, board.target);
+      console.log(`Length of the shortest path: ${pathLength}`);
+    }
     let newSuccess;
     if (type === "weighted") {
       newSuccess = weightedSearchAlgorithm(board.nodes, board.object, board.target, board.nodesToAnimate, board.boardArray, algorithm);

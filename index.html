@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Pathfinding Visualizer</title>
+    <title>Pathfinder</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link id="cssTheme" rel="stylesheet" href="public/styling/cssBasic.css"/>
     <link rel="shortcut icon" type="image/png" href="public/styling/c_icon.png"/>
@@ -10,9 +10,9 @@
      <nav class="navbar navbar-inverse">
        <div class="container-fluid">
          <div class="navbar-header">
-           <a id="refreshButton" class="navbar-brand" href="#">Pathfinding Visualizer</a>
+           <a id="refreshButton" class="navbar-brand" href="#">Pathfinder</a>
          </div>
-         <ul class="nav navbar-nav">
+         <ul class="nav navbar-nav">  
            <li class="dropdown">
              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Algorithms
              <span class="caret"></span></a>
@@ -28,19 +28,19 @@
              </ul>
            </li>
            <li class="dropdown">
-             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-             
+             <a href="#" id='startButtonCreateMazeOne'>Generate Maze</a>
+              
              <ul class="dropdown-menu">
-               <li id='startButtonCreateMazeTwo'><a href="#">Recursive Division</a></li>
-               <li id='startButtonCreateMazeThree'><a href="#">Recursive Division (vertical skew)</a></li>
-               <li id='startButtonCreateMazeFour'><a href="#">Recursive Division (horizontal skew)</a></li>
-               <li id='startButtonCreateMazeOne'><a href="#">Basic Random Maze</a></li>
-               <li id='startButtonCreateMazeWeights'><a href="#">Basic Weight Maze</a></li>
-               <li id='startStairDemonstration'><a href="#">Simple Stair Pattern</a></li>
+               <li id='startButtonCreateMazeTwo'><a href="#"></a></li>
+               <li id='startButtonCreateMazeThree'><a href="#"></a></li>
+               <li id='startButtonCreateMazeFour'><a href="#"></a></li>
+               <li id='startButtonCreateMazeOne'></li>
+               <li id='startButtonCreateMazeWeights'><a href="#"></a></li>
+               <li id='startStairDemonstration'><a href="#"></a></li>
              </ul>
            </li>
            <li id='startButtonAddObject'><a href="#"> </a></li>
-           <li id='startButtonStart'><button id="actualStartButton" class="btn btn-default navbar-btn" type="button">Visualize!</button></li>
+           <li id='startButtonStart'><button id="actualStartButton" class="btn btn-default navbar-btn" type="button">Run!</button></li>
            <li id='startButtonClearBoard'><a href="#">Clear Board</a></li>
            <li id='startButtonClearWalls'><a href="#">Clear Walls &amp; Weights</a></li>
            <li id='startButtonClearPath'><a href="#">Clear Path</a></li>
@@ -89,7 +89,7 @@
         </ul>
       </div>
       <div id="algorithmDescriptor"></div>
-      <table id='board'/>
+      <table id='board'></table>
     </div>
   </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
