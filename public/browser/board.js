@@ -294,11 +294,20 @@ Board.prototype.addShortestPath = function(targetNodeId, startNodeId, object) {
   console.log(`Length of the shortest path: ${pathLength}`);
 };
 
+// Function to count the number of yellow cells and update the path length
+function updateShortestPathLength() {
+  const shortestPathCells = document.querySelectorAll('.shortest-path');
+  const pathLength = shortestPathCells.length;
+  document.getElementById('pathLengthValue').innerText = pathLength;
+  console.log(`Length of the shortest path: ${pathLength}`);
+}
+
 Board.prototype.drawShortestPathTimeout = function(targetNodeId, startNodeId, type, object) {
   let board = this;
   let currentNode;
   let secondCurrentNode;
   let currentNodesToAnimate;
+  let pathLength = 0; // Initialize path length
 
   if (board.currentAlgorithm !== "bidirectional") {
     currentNode = board.nodes[board.nodes[targetNodeId].previousNode];
@@ -310,6 +319,7 @@ Board.prototype.drawShortestPathTimeout = function(targetNodeId, startNodeId, ty
       while (currentNode.id !== startNodeId) {
         currentNodesToAnimate.unshift(currentNode);
         currentNode = board.nodes[currentNode.previousNode];
+        pathLength++; // Increment path length
       }
     }
   } else {
@@ -327,6 +337,7 @@ Board.prototype.drawShortestPathTimeout = function(targetNodeId, startNodeId, ty
         while (currentNode.id !== startNodeId) {
           currentNodesToAnimate.unshift(currentNode);
           currentNode = board.nodes[currentNode.previousNode];
+          pathLength++; // Increment path length
         }
         currentNodesToAnimate.push(board.nodes[board.middleNode]);
         while (secondCurrentNode.id !== targetNodeId) {
@@ -343,17 +354,21 @@ Board.prototype.drawShortestPathTimeout = function(targetNodeId, startNodeId, ty
           if (secondCurrentNode.otherpreviousNode === targetNodeId) {
             board.nodes[board.target].direction = getDistance(secondCurrentNode, board.nodes[board.target])[2];
           }
-          secondCurrentNode = board.nodes[secondCurrentNode.otherpreviousNode]
+          secondCurrentNode = board.nodes[secondCurrentNode.otherpreviousNode];
+          pathLength++; // Increment path length
         }
+      }
+    } else {
+      currentNodesToAnimate = [];
+      let target = board.nodes[board.target];
+      currentNodesToAnimate.push(board.nodes[target.previousNode], target);
+      pathLength++; // Increment path length
     }
-  } else {
-    currentNodesToAnimate = [];
-    let target = board.nodes[board.target];
-    currentNodesToAnimate.push(board.nodes[target.previousNode], target);
   }
 
-}
-
+  // Display the path length
+  document.getElementById('pathLengthValue').innerText = pathLength;
+  console.log(`Length of the shortest path: ${pathLength}`);
 
   timeout(0);
 
@@ -369,12 +384,13 @@ Board.prototype.drawShortestPathTimeout = function(targetNodeId, startNodeId, ty
       }
       if (index > currentNodesToAnimate.length) {
         board.toggleButtons();
+        // Update the shortest path length after the algorithm is complete
+        updateShortestPathLength();
         return;
       }
       timeout(index + 1);
-    }, 40)
+    }, 40);
   }
-
 
   function shortestPathChange(currentNode, previousNode, isActualTarget) {
     if (currentNode === "object") {
@@ -417,11 +433,6 @@ Board.prototype.drawShortestPathTimeout = function(targetNodeId, startNodeId, ty
       element.className = "startTransparent";
     }
   }
-
-
-
-
-
 };
 
 Board.prototype.createMazeOne = function(type) {
