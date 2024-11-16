@@ -93,7 +93,7 @@
           <div class="visitedobject"></div>Visited Nodes
         </li>
         <li>
-          <div class="shortest-path"></div>Shortest-path Node
+          <div class="shortest-path"></div>Shortest-path 
         </li>
         <li>
           <div class="wall"></div>Wall Node
@@ -111,22 +111,23 @@
 <script src='public/browser/bundle.js'></script>
 <style>
   #shortest-path-count {
-    width: 200px !important;
+    width: 300px !important;
     text-align: center;
     position: relative;
-    margin-top: -30px !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 </style>
 <script>
   function updateShortestPathCount() {
     var count = document.getElementsByClassName('shortest-path').length;
     if (count) {
-      document.getElementById('shortest-path-count').innerHTML = 'Shortest Path Nodes: ' + (count - 1);
+      document.getElementById('shortest-path-count').innerHTML = 'Shortest Path Length: ' + (count - 1);
     } else {
-      document.getElementById('shortest-path-count').innerHTML = 'Shortest Path Nodes: 0';
+      document.getElementById('shortest-path-count').innerHTML = 'Shortest Path Length: 0';
     }
   }
-  setInterval(updateShortestPathCount, 10);
+  setInterval(updateShortestPathCount, 1);
 </script>
 
 </html>
